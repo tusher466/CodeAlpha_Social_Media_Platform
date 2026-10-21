@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — Modern Social Media Platform</title>
+  <meta name="description" content="A lightweight, responsive mini social media platform with user profiles, posts, comments, and like/follow interactions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+</head>
+<body>
+  <!-- App Container -->
+  <div class="app-layout">
+
+    <!-- LEFT SIDEBAR / NAVIGATION -->
+    <aside class="sidebar-left">
+      <div class="brand">
+        <a href="#" class="brand-logo" id="nav-brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+          <span class="brand-name">Pulse</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" id="nav-feed-btn" title="Home Feed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Feed</span>
+        </button>
+        <button class="nav-item" id="nav-explore-btn" title="Explore & Hashtags">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <span>Explore</span>
+        </button>
+        <button class="nav-item" id="nav-profile-btn" title="My Profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-action-wrap">
+        <button class="btn btn-primary btn-compose" id="open-compose-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span>New Post</span>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <!-- User Badge or Login Button -->
+        <div id="sidebar-user-section">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER MAIN CONTENT -->
+    <main class="main-content">
+      <!-- Top Mobile / Sticky Header -->
+      <header class="top-header">
+        <div class="top-header-mobile">
+          <div class="mobile-brand">
+            <svg class="brand-icon-sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            <span>Pulse</span>
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn theme-toggle-btn" id="theme-toggle" title="Toggle Dark/Light Mode">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <div id="mobile-auth-btn-wrap"></div>
+          </div>
+        </div>
+
+        <!-- Feed Tabs (When in Feed View) -->
+        <div class="feed-tabs" id="feed-tabs-bar">
+          <button class="feed-tab active" data-feed="for-you" id="tab-for-you">
+            <span>For You</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="feed-tab" data-feed="following" id="tab-following">
+            <span>Following</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <div class="header-actions-desktop">
+            <button class="icon-btn theme-toggle-btn" id="theme-toggle-desktop" title="Toggle Theme">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter / Hashtag active banner (hidden by default) -->
+        <div class="active-filter-banner" id="active-filter-banner" style="display: none;">
+          <span id="active-filter-text">Filtering by #hashtag</span>
+          <button class="btn-clear-filter" id="btn-clear-filter" title="Clear filter">✕ Clear</button>
+        </div>
+      </header>
+
+      <!-- View Containers -->
+      <div class="view-container">
+
+        <!-- VIEW 1: HOME FEED -->
+        <section class="view active" id="view-feed">
+          <!-- Post Composer Box -->
+          <div class="composer-card" id="feed-composer">
+            <div class="composer-top">
+              <img class="avatar avatar-md" id="composer-avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=guest" alt="Avatar">
+              <div class="composer-body">
+                <textarea 
+                  class="composer-textarea" 
+                  id="composer-text" 
+                  placeholder="What's happening in your world?" 
+                  rows="3" 
+                  maxlength="2000"
+                ></textarea>
+
+                <!-- Media Preview Area -->
+                <div class="composer-media-preview" id="composer-media-preview" style="display: none;">
+                  <img id="composer-preview-img" src="" alt="Post image attachment">
+                  <button type="button" class="btn-remove-media" id="btn-remove-media" title="Remove attachment">✕</button>
+                </div>
+
+                <!-- URL image input row (collapsible) -->
+                <div class="composer-url-input-row" id="composer-url-row" style="display: none;">
+                  <input type="url" id="composer-url-input" class="input" placeholder="Paste image URL (https://...)" />
+                  <button type="button" class="btn btn-sm btn-secondary" id="btn-apply-img-url">Add</button>
+                </div>
+
+                <div class="composer-bottom">
+                  <div class="composer-tools">
+                    <!-- File upload button -->
+                    <label class="tool-btn" title="Upload image">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                      <input type="file" id="composer-file-input" accept="image/*" style="display: none;">
+                    </label>
+                    <!-- Image URL button -->
+                    <button type="button" class="tool-btn" id="btn-toggle-url-input" title="Insert image from link">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </button>
+                    <!-- Quick tags -->
+                    <div class="quick-tags">
+                      <button type="button" class="quick-tag-chip" data-tag="#webdev">#webdev</button>
+                      <button type="button" class="quick-tag-chip" data-tag="#javascript">#javascript</button>
+                      <button type="button" class="quick-tag-chip" data-tag="#design">#design</button>
+                    </div>
+                  </div>
+
+                  <div class="composer-actions">
+                    <span class="char-counter" id="composer-counter">2000</span>
+                    <button class="btn btn-primary" id="btn-publish-post">
+                      <span>Post</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feed Post List -->
+          <div class="posts-stream" id="posts-stream">
+            <div class="loading-state" id="posts-loading">
+              <div class="spinner"></div>
+              <p>Loading posts...</p>
+            </div>
+            <!-- Posts rendered here -->
+          </div>
+        </section>
+
+        <!-- VIEW 2: PROFILE VIEW -->
+        <section class="view" id="view-profile" style="display: none;">
+          <div class="profile-header-card" id="profile-header-container">
+            <!-- Dynamic profile header will be rendered here -->
+          </div>
+
+          <!-- Profile Nav Tabs -->
+          <div class="profile-tabs">
+            <button class="profile-tab active" data-tab="posts" id="ptab-posts">Posts</button>
+            <button class="profile-tab" data-tab="liked" id="ptab-liked">Liked Posts</button>
+          </div>
+
+          <!-- Profile Posts Stream -->
+          <div class="posts-stream" id="profile-posts-stream">
+            <!-- Posts rendered here -->
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- RIGHT SIDEBAR (SEARCH, SUGGESTIONS, TRENDS) -->
+    <aside class="sidebar-right">
+      <!-- Search Box -->
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="global-search-input" placeholder="Search people & tags..." autocomplete="off">
+        <div class="search-dropdown" id="search-dropdown" style="display: none;">
+          <!-- Autocomplete results -->
+        </div>
+      </div>
+
+      <!-- Quick Switch / Demo Accounts -->
+      <div class="widget-card demo-accounts-card">
+        <div class="widget-header">
+          <h3>⚡ Quick Demo Switcher</h3>
+        </div>
+        <p class="widget-sub">Instantly switch accounts to test following, liking, and commenting between profiles:</p>
+        <div class="demo-user-list">
+          <button class="demo-user-chip" data-user="alex_tech">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60" alt="">
+            <span>@alex_tech</span>
+          </button>
+          <button class="demo-user-chip" data-user="maya_dev">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60" alt="">
+            <span>@maya_dev</span>
+          </button>
+          <button class="demo-user-chip" data-user="jordan_art">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60" alt="">
+            <span>@jordan_art</span>
+          </button>
+          <button class="demo-user-chip" data-user="david_kim">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60" alt="">
+            <span>@david_kim</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Who to follow widget -->
+      <div class="widget-card" id="who-to-follow-card">
+        <div class="widget-header">
+          <h3>Who to follow</h3>
+        </div>
+        <div class="suggestions-list" id="suggestions-list">
+          <!-- Suggested users rendered here -->
+        </div>
+      </div>
+
+      <!-- Trending Hashtags widget -->
+      <div class="widget-card">
+        <div class="widget-header">
+          <h3>Trending Topics</h3>
+        </div>
+        <div class="trends-list">
+          <div class="trend-item" data-tag="webdev">
+            <span class="trend-category">Technology · Trending</span>
+            <span class="trend-tag">#webdev</span>
+            <span class="trend-count">Full-stack & APIs</span>
+          </div>
+          <div class="trend-item" data-tag="javascript">
+            <span class="trend-category">Programming · Trending</span>
+            <span class="trend-tag">#javascript</span>
+            <span class="trend-count">Node 24 & ESNext</span>
+          </div>
+          <div class="trend-item" data-tag="design">
+            <span class="trend-category">Creative · Trending</span>
+            <span class="trend-tag">#design</span>
+            <span class="trend-count">UI / UX Micro-interactions</span>
+          </div>
+          <div class="trend-item" data-tag="photography">
+            <span class="trend-category">Visual Arts · Trending</span>
+            <span class="trend-tag">#photography</span>
+            <span class="trend-count">Golden hour & Cityscapes</span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="legal-footer">
+        <p>© 2026 Pulse Platform. HTML • CSS • JavaScript • Express • SQLite.</p>
+      </footer>
+    </aside>
+
+  </div>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <button class="m-nav-item active" id="m-nav-feed">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="m-nav-item" id="m-nav-explore">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      <span>Explore</span>
+    </button>
+    <button class="m-nav-item m-nav-compose" id="m-nav-compose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+    <button class="m-nav-item" id="m-nav-profile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
+
+  <!-- MODALS -->
+
+  <!-- 1. AUTH MODAL (LOGIN & REGISTER) -->
+  <div class="modal-backdrop" id="auth-modal" style="display: none;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-header">
+        <h2 id="auth-modal-title">Welcome to Pulse</h2>
+        <button class="modal-close" data-close="auth-modal">✕</button>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-auth-login">Sign In</button>
+        <button class="auth-tab" id="tab-auth-register">Create Account</button>
+      </div>
+
+      <!-- Login Form -->
+      <form class="auth-form" id="login-form">
+        <div class="form-group">
+          <label for="login-identifier">Username or Email</label>
+          <input type="text" id="login-identifier" class="input" placeholder="e.g. alex_tech or alex@example.com" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+        <div class="auth-divider"><span>or test with demo</span></div>
+        <div class="quick-demo-buttons">
+          <button type="button" class="btn btn-outline btn-sm quick-login-btn" data-user="alex_tech">Login as Alex</button>
+          <button type="button" class="btn btn-outline btn-sm quick-login-btn" data-user="maya_dev">Login as Maya</button>
+        </div>
+      </form>
+
+      <!-- Register Form -->
+      <form class="auth-form" id="register-form" style="display: none;">
+        <div class="form-group">
+          <label for="reg-username">Username</label>
+          <input type="text" id="reg-username" class="input" placeholder="e.g. coder_jane" required minlength="3" maxlength="25">
+        </div>
+        <div class="form-group">
+          <label for="reg-fullname">Display Name</label>
+          <input type="text" id="reg-fullname" class="input" placeholder="e.g. Jane Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" class="input" placeholder="jane@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" class="input" placeholder="Minimum 6 characters" required minlength="6">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. EDIT PROFILE MODAL -->
+  <div class="modal-backdrop" id="edit-profile-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>Edit Profile</h2>
+        <button class="modal-close" data-close="edit-profile-modal">✕</button>
+      </div>
+      <form id="edit-profile-form">
+        <div class="form-group">
+          <label for="edit-display-name">Display Name</label>
+          <input type="text" id="edit-display-name" class="input" required maxlength="50">
+        </div>
+        <div class="form-group">
+          <label for="edit-bio">Bio</label>
+          <textarea id="edit-bio" class="input" rows="3" maxlength="200" placeholder="Tell the world about yourself..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edit-location">Location</label>
+            <input type="text" id="edit-location" class="input" placeholder="e.g. San Francisco, CA">
+          </div>
+          <div class="form-group">
+            <label for="edit-website">Website</label>
+            <input type="url" id="edit-website" class="input" placeholder="https://yourwebsite.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Profile Avatar</label>
+          <div class="avatar-edit-options">
+            <div class="current-avatar-preview">
+              <img id="edit-avatar-preview" src="" alt="Avatar Preview" class="avatar avatar-lg">
+            </div>
+            <div class="avatar-controls">
+              <label class="btn btn-outline btn-sm">
+                <span>Upload New Image</span>
+                <input type="file" id="edit-avatar-file" accept="image/*" style="display: none;">
+              </label>
+              <button type="button" class="btn btn-ghost btn-sm" id="btn-dicebear-avatar">Generate Random Avatar</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="edit-profile-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. FOLLOWERS / FOLLOWING USERS LIST MODAL -->
+  <div class="modal-backdrop" id="users-list-modal" style="display: none;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-header">
+        <h2 id="users-list-title">Followers</h2>
+        <button class="modal-close" data-close="users-list-modal">✕</button>
+      </div>
+      <div class="users-list-content" id="users-list-body">
+        <!-- Rendered list of users -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. COMMENTS & POST DETAIL MODAL (EXPANDED THREAD) -->
+  <div class="modal-backdrop" id="post-detail-modal" style="display: none;">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h2>Post Conversation</h2>
+        <button class="modal-close" data-close="post-detail-modal">✕</button>
+      </div>
+      <div class="post-detail-content" id="post-detail-body">
+        <!-- Main post detail card rendered here -->
+      </div>
+      <div class="comments-section" id="comments-section">
+        <h3 class="comments-heading">Comments</h3>
+        <!-- Comment Input Box -->
+        <div class="comment-input-box" id="modal-comment-input-wrap">
+          <textarea id="modal-comment-text" placeholder="Write a thoughtful reply..." rows="2" maxlength="500"></textarea>
+          <button class="btn btn-primary btn-sm" id="btn-submit-modal-comment">Reply</button>
+        </div>
+        <!-- Comments List -->
+        <div class="comments-stream" id="modal-comments-stream">
+          <!-- Comments rendered here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/state.js"></script>
+  <script src="/js/components.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
